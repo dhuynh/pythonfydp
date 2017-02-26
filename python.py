@@ -1,9 +1,13 @@
 
+import ast
 
-lines = []
+solution = {}
+transformsolution = []
 
 with open("solution.txt") as f:
-	lines = f.read().splitlines()
+	solution = f.read()
 
-with open('transformedsolution.txt', 'w') as s:
-	s.write(lines)
+solution = ast.literal_eval(solution)
+
+print solution.keys()
+
