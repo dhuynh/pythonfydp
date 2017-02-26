@@ -21,7 +21,7 @@ for combination in solution:
 		stripped_key = port[8:]
 		stripped_key = stripped_key[1:-1]
 		port_dict_scanner[stripped_key] = raw_scanner_data[port]
-	transform_solution[combination] = port_dict_scanner
+	solution[combination]['scanner'] = port_dict_scanner
 
-print transform_solution
+print solution
 
