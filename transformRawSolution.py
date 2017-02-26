@@ -18,6 +18,7 @@ for combination in solution:
 	raw_scanner_data = solution[combination]['scanner']
 	for port in raw_scanner_data:
 		stripped_key = port[8:]
+		stripped_key = stripped_key[1:-1]
 		transform_solution[stripped_key] = raw_scanner_data[port]
 
 print transform_solution
