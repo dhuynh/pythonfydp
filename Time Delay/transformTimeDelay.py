@@ -33,31 +33,32 @@ def findScannersAndContainerCount(raw_data):
 
 				if raw_verbose_data[foreign_or_dest_or_scanner] != 0.0:
 
-					print "foreign ->" + scanner_port
-					print "foreign ->" + raw_verbose_data[foreign_or_dest_or_scanner]
+					'''print "foreign -> " + scanner_port
+					print "value -> " + str(raw_verbose_data[foreign_or_dest_or_scanner])
 
-					bp()
+					bp()'''
 
 					if not existInDict(scanner_port, scanner_port_filled_dict[combination]):
 						populateScannerKeys(scanner_port, scanner_port_filled_dict[combination])
 
-						print "Does not Exist so fill"
+						'''print "Does not Exist so fill"
 						print scanner_port_filled_dict
-						bp()
+						bp()'''
 
 					try:
-						scanner_port_filled_dict[combination][scanner_port]['Total_TEU'] += raw_verbose_data[foreign_or_dest_or_scanner]
+						scanner_port_filled_dict[combination][scanner_port]['Total_TEU'] += round(raw_verbose_data[foreign_or_dest_or_scanner], 2)
 
-						print "Add TEU"
+						'''print "Add TEU"
 						print scanner_port_filled_dict
-						bp()
+						bp()'''
 
 					except KeyError:
 						scanner_port_filled_dict[combination][scanner_port]['Total_TEU'] = raw_verbose_data[foreign_or_dest_or_scanner]
 
-						print "set TEU"
+						'''print "set TEU"
 						print scanner_port_filled_dict
-						bp()
+						bp()'''
+
 			elif foreign_or_dest_or_scanner[:8] == 'scanners':
 
 
@@ -66,27 +67,25 @@ def findScannersAndContainerCount(raw_data):
 
 				if raw_verbose_data[foreign_or_dest_or_scanner] != 0.0:
 
-					print "scanners -> " + scanner_port
-					print "value -> " + raw_verbose_data[foreign_or_dest_or_scanner]
-					bp()
+					'''print "scanners -> " + scanner_port
+					print "value -> " + str(raw_verbose_data[foreign_or_dest_or_scanner])
+					bp()'''
 
 					if not existInDict(scanner_port, scanner_port_filled_dict[combination]):
 						populateScannerKeys(scanner_port, scanner_port_filled_dict[combination])
 
-						print "Does not Exist so fill"
+						'''print "Does not Exist so fill"
 						print scanner_port_filled_dict
-						bp()
+						bp()'''
 						
-					scanner_port_filled_dict[combination][scanner_port]['scanners'] = raw_verbose_data[foreign_or_dest_or_scanner]
+					scanner_port_filled_dict[combination][scanner_port]['scanners'] = round(raw_verbose_data[foreign_or_dest_or_scanner],1)
 
-					print "Set Scanner"
+					'''print "Set Scanner"
 					print scanner_port_filled_dict
-					bp()
+					bp()'''
 
 			elif foreign_or_dest_or_scanner[:9] == 'dest_ship':
 				pass
-
-			print "End Pass"
 
 	print scanner_port_filled_dict
 	return
@@ -95,8 +94,7 @@ def existInDict(scanner_port, port_dict):
 	for key in port_dict:
 		if scanner_port == key:
 			return True
-		else:
-			return False
+	return False
 
 def populateScannerKeys(scanner_port, port_dict):
 	port_dict[scanner_port] = {}
