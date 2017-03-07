@@ -19,17 +19,22 @@ def calculateFullSet(time_delay_inputs):
 		for port in time_delay_inputs[combination]:
 			h = float(time_delay_inputs[combination][port]['Total_TEU'])
 			c = float(time_delay_inputs[combination][port]['scanners'])
+			print port
 			if c or h !=0.0:
 				time_delay_output[port] = timeDelayEquation(h, c)
 	return
 
+
 def timeDelayEquation(h, c):
 	mu = float(10*24*365)
+	print h, c
+	print mu
+	print float(c*mu*(1-h/(c*mu)))
 	if float(c*mu*(1-h/(c*mu))) != 0.0:
 		timeDelay = float(1/(c*mu*(1-h/(c*mu))) + 1/mu)
-		return timeDelay
 	else:
-		return 'N/A'
+		timeDelay = float(1/(c*mu*(1-(h-1)/(c*mu))) + 1/mu)
+	return timeDelay
 
 
 with open("time_delay_inputs.json") as f:
