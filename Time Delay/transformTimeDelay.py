@@ -126,8 +126,8 @@ findScannersAndContainerCount(raw_data)
 #with open('scannerData.json', 'w') as solution_dump:
 #	json.dump(solution, solution_dump, sort_keys=True)
 
-#with open('scannerFreq.json', 'w') as scannerFreqDump:
-#	json.dump(scannerFreqDict, scannerFreqDump, sort_keys=True)
+with open('time_delay_inputs.json', 'w') as time_inputs:
+	json.dump(scanner_port_filled_dict, time_inputs, sort_keys=True)
 
 
 
