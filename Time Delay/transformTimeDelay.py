@@ -17,7 +17,7 @@ for each scanner port, calculate total TEU
 store TEU arriving
 Find scanning capacity after'''
 
-def findScannerContainerCount(raw_data):
+def findScannersAndContainerCount(raw_data):
 	stripped_key = ''
 	scanner = ''
 	for combination in raw_data:
@@ -30,11 +30,10 @@ def findScannerContainerCount(raw_data):
 				stripped_key = stripped_key[1:-1]
 				scanner_port = stripped_key.split(",", 1)[-1]
 
-				if not existInDict(scanner_port, scanner_port_filled_dict[combination]):
+				if raw_verbose_data[foreign_or_dest_or_scanner] != 0.0:
+					if not existInDict(scanner_port, scanner_port_filled_dict[combination]):
 						scanner_port_filled_dict[combination][scanner_port] = {}
 						scanner_port_filled_dict[combination][scanner_port]['Total_TEU'] = 0
-
-				if raw_verbose_data[foreign_or_dest_or_scanner] is not None:
 					try:
 						scanner_port_filled_dict[combination][scanner_port]['Total_TEU'] += raw_verbose_data[foreign_or_dest_or_scanner]
 					except KeyError:
@@ -42,6 +41,8 @@ def findScannerContainerCount(raw_data):
 			elif foreign_or_dest_or_scanner[:8] == 'scanners':
 				stripped_key = foreign_or_dest_or_scanner[8:]
 				scanner_port = stripped_key[1:-1]
+				bp()
+
 
 				if not existInDict(scanner_port, scanner_port_filled_dict[combination]):
 						scanner_port_filled_dict[combination][scanner_port] = {}
@@ -78,7 +79,7 @@ raw_data = ast.literal_eval(raw_data)
 #print solution.keys()
 
 
-findScannerContainerCount(raw_data)
+findScannersAndContainerCount(raw_data)
 
 
 #with open('scannerData.json', 'w') as solution_dump:
