@@ -42,7 +42,6 @@ with open("solution.txt") as f:
 solution = ast.literal_eval(solution)
 
 #print solution.keys()
-
 stripped_key = ''
 
 clearScannerNames(solution)
