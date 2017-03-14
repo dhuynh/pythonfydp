@@ -12,10 +12,10 @@ scannerFreqDict = {}
 
 def clearScannerNames(solution):
 	for combination in solution:
-		raw_scanner_data = solution[combination]['scanner']
+		raw_scanner_data = solution[combination]['vars']
 		port_dict_scanner = {}
 		for port in raw_scanner_data:
-			stripped_key = port[8:]
+			stripped_key = port[1:]
 			stripped_key = stripped_key[1:-1]
 			port_dict_scanner[stripped_key] = raw_scanner_data[port]
 		solution[combination]['scanner'] = port_dict_scanner
@@ -23,8 +23,8 @@ def clearScannerNames(solution):
 
 def findScannerFrequency(solution):
 	for combination in solution:
-		for port in solution[combination]['scanner']:
-			if solution[combination]['scanner'][port] == 1:
+		for port in solution[combination]['vars']:
+			if solution[combination]['vars'][port] == 1:
 				try:
 					scannerFreqDict[port] +=1
 				except KeyError:
@@ -44,11 +44,11 @@ solution = ast.literal_eval(solution)
 #print solution.keys()
 stripped_key = ''
 
-clearScannerNames(solution)
+#clearScannerNames(solution)
 
-findScannerFrequency(solution)
+#findScannerFrequency(solution)
 
-print scannerFreqDict
+#print scannerFreqDict
 
 with open('transformed.json', 'w') as solution_dump:
 	json.dump(solution, solution_dump, sort_keys=True)

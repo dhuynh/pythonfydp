@@ -21,13 +21,19 @@ def findScannersAndContainerCount(raw_data):
 	stripped_key = ''
 	scanner = ''
 	for combination in raw_data:
-		raw_verbose_data = raw_data[combination]['scanner']
+		try:
+			raw_verbose_data = raw_data[combination]['vars']
+		except:
+			continue
+
+		print '1'
+		
 		scanner_port_filled_dict[combination] = {}
 
 		for foreign_or_dest_or_scanner in raw_verbose_data:
 
-			if foreign_or_dest_or_scanner[:12] == 'foreign_ship':
-				stripped_key = foreign_or_dest_or_scanner[12:]
+			if foreign_or_dest_or_scanner[:1] == 'f':
+				stripped_key = foreign_or_dest_or_scanner[1:]
 				stripped_key = stripped_key[1:-1]
 				scanner_port = stripped_key.split(",", 1)[-1]
 
@@ -59,10 +65,10 @@ def findScannersAndContainerCount(raw_data):
 						print scanner_port_filled_dict
 						bp()'''
 
-			elif foreign_or_dest_or_scanner[:8] == 'scanners':
+			elif foreign_or_dest_or_scanner[:1] == 's':
 
 
-				stripped_key = foreign_or_dest_or_scanner[8:]
+				stripped_key = foreign_or_dest_or_scanner[1:]
 				scanner_port = stripped_key[1:-1]
 
 				if raw_verbose_data[foreign_or_dest_or_scanner] != 0.0:
@@ -78,13 +84,13 @@ def findScannersAndContainerCount(raw_data):
 						print scanner_port_filled_dict
 						bp()'''
 						
-					scanner_port_filled_dict[combination][scanner_port]['scanners'] = round(raw_verbose_data[foreign_or_dest_or_scanner],1)
+					scanner_port_filled_dict[combination][scanner_port]['scanners'] = raw_verbose_data[foreign_or_dest_or_scanner]
 
 					'''print "Set Scanner"
 					print scanner_port_filled_dict
 					bp()'''
 
-			elif foreign_or_dest_or_scanner[:9] == 'dest_ship':
+			elif foreign_or_dest_or_scanner[:1] == 'd':
 				pass
 
 	print scanner_port_filled_dict
@@ -107,20 +113,19 @@ def existInDictScanner(scanner_port, port_dict):
 	for key in port_dict:
 		if scanner_port == key:
 			return True
-		else:
-			return False
+	return False
 
 
 
 #mainRun
 
 
-with open("verbose_result.txt") as f:
+with open("solutiongoldv.txt") as f:
 	raw_data = f.read()
 
 raw_data = ast.literal_eval(raw_data)
 
-findScannersAndContainerCount(raw_data)
+findScannersAndContainerCount(raw_data[0])
 
 
 #with open('scannerData.json', 'w') as solution_dump:

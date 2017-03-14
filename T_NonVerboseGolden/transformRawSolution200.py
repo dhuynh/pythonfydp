@@ -56,8 +56,8 @@ findScannerFrequency(solution)
 
 print scannerFreqDict
 
-with open('transformed.json', 'w') as solution_dump:
-	json.dump(solution, solution_dump, sort_keys=True)
+#with open('transformed.json', 'w') as solution_dump:
+#	json.dump(solution, solution_dump, sort_keys=True)
 
 with open('scannerFreq.json', 'w') as scannerFreqDump:
 	json.dump(scannerFreqDict, scannerFreqDump, sort_keys=True)
