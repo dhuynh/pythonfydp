@@ -53,15 +53,20 @@ def calculatePq(c,p,pnot):
 def calculatePnot(c,p):
 	pnot = 0
 	print 'p: ' + str(p), 'c: ' + str(c)
+	print int(c-1) == 0
 	for k in range(0,int(c-1)):
 		print 'first term: ' + str(firstTerm(c,p,k)), 'second term: ' + str(secondTerm(c,p))
 		pnot += firstTerm(c,p,k) + secondTerm(c,p)
 
-	if c == 1:
+	print type(c)
+	print c == 1.0
+	if int(c-1) == 0:
 		print 'first term: ' + str(firstTerm(c,p,1)), 'second term: ' + str(secondTerm(c,p))
 		pnot += firstTerm(c,p,1) + secondTerm(c,p)
 
 	print 'pnot:' + str(pnot)
+
+	pnot = 1/pnot
 
 	return pnot
 
