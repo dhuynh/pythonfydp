@@ -20,19 +20,16 @@ def calculateFullSet(time_delay_inputs):
 		for port in time_delay_inputs[combination]:
 			h = float(time_delay_inputs[combination][port]['Total_TEU'])
 			c = float(time_delay_inputs[combination][port]['scanners'])
-			print port
 			if c and h !=0.0:
 				time_delay_output[port] = timeDelayEquation(h, c)
 	return
 
 
 def timeDelayEquation(h, c):
-	mu = float(10*24*365)
+	mu = float(10*24*365*1.5001)
 
 	p = h/(c*mu)
 
-
-	print h, p
 
 	pnot = 0
 	pq = 0
@@ -41,6 +38,8 @@ def timeDelayEquation(h, c):
 	pnot = calculatePnot(c,p)
 	pq = calculatePq(c,p,pnot)
 	time_delay = calculateTw(pq,p,h,mu)
+
+	#print pnot, pq, time_delay
 
 	return time_delay
 
@@ -53,15 +52,24 @@ def calculatePq(c,p,pnot):
 
 def calculatePnot(c,p):
 	pnot = 0
+	print 'p: ' + str(p), 'c: ' + str(c)
 	for k in range(0,int(c-1)):
+		print 'first term: ' + str(firstTerm(c,p,k)), 'second term: ' + str(secondTerm(c,p))
 		pnot += firstTerm(c,p,k) + secondTerm(c,p)
+
+	if c == 1:
+		print 'first term: ' + str(firstTerm(c,p,1)), 'second term: ' + str(secondTerm(c,p))
+		pnot += firstTerm(c,p,1) + secondTerm(c,p)
+
+	print 'pnot:' + str(pnot)
+
 	return pnot
 
 def firstTerm(c,p,k):
 	return (m.pow(c*p,k)/m.factorial(k))
 
 def secondTerm(c,p):
-	return (m.pow(c*p, c)/m.factorial(int(c))*(1/(1-p)))
+	return (m.pow(c*p, c)/m.factorial(int(c)))*(1/(1-p))
 
 
 #Main
