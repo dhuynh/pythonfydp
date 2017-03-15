@@ -17,11 +17,13 @@ time_delay_output = {}
 
 def calculateFullSet(time_delay_inputs):
 	for combination in time_delay_inputs:
+		time_delay_output[combination] = {}
 		for port in time_delay_inputs[combination]:
 			h = float(time_delay_inputs[combination][port]['Total_TEU'])
 			c = float(time_delay_inputs[combination][port]['scanners'])
 			if c and h !=0.0:
-				time_delay_output[port] = timeDelayEquation(h, c)
+					time_delay_output[combination][port] = timeDelayEquation(h, c)
+
 	return
 
 

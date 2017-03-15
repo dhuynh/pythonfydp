@@ -21,13 +21,8 @@ def findScannersAndContainerCount(raw_data):
 	stripped_key = ''
 	scanner = ''
 	for combination in raw_data:
-		try:
-			raw_verbose_data = raw_data[combination]['vars']
-		except:
-			continue
-
-		print '1'
-		
+		raw_verbose_data = raw_data[combination]['vars']
+ 		
 		scanner_port_filled_dict[combination] = {}
 
 		for foreign_or_dest_or_scanner in raw_verbose_data:
@@ -131,7 +126,7 @@ findScannersAndContainerCount(raw_data[0])
 #with open('scannerData.json', 'w') as solution_dump:
 #	json.dump(solution, solution_dump, sort_keys=True)
 
-with open('time_delay_inputs.json', 'w') as time_inputs:
+with open('time_delay_inputs2.json', 'w') as time_inputs:
 	json.dump(scanner_port_filled_dict, time_inputs, sort_keys=True)
 
 
