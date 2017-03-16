@@ -11,7 +11,7 @@ new_output = []
 
 for combination in time_delay_output:
 	for port in time_delay_output[combination]:
-		new_output.append((combination, time_delay_output[combination][port]))
+		new_output.append((combination, port, time_delay_output[combination][port]*365))
 
 
 
